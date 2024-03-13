@@ -2,8 +2,8 @@ Dinu Sebastian - Team Lead
 Bebu Octavian - Backend                                                                                                                                                                                                 
 Plapana Madalin - Frontend                                                                                                                                                                                             
 
-#KeepItFit
-##Aplicație de Monitorizare a Fitness-ului:
+# KeepItFit
+## Aplicație de Monitorizare a Fitness-ului:
 
 Frontend: HTML + CSS / React
 Backend: Node.js cu Express
