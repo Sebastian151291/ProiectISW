@@ -6,6 +6,6 @@ Plapana Madalin - Frontend
 ## Aplicație de Monitorizare a Fitness-ului:
 
 Frontend: HTML + CSS / React                                                                                                                                                                                                      
-Backend: Node.js cu Express                                                                                                                                                                                                        
+Backend: Python cu FastAPI                                                                                                                                                                                                       
 Bază de date: MySQL                                                                                                                                                                                                                
 Dezvoltă funcționalități pentru urmărirea progresului în fitness, introducând autentificare pentru a salva și gestiona datele personale.                                                                                                                                                   
