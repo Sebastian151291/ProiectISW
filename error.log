@@ -1,0 +1,2 @@
+2024-04-01 22:31:44,388 - main - ERROR - Error occurred during user registration: bcrypt: no backends available -- recommend you install one (e.g. 'pip install bcrypt')
+2024-04-01 22:43:33,793 - main - ERROR - Error occurred during user login: 401: Incorrect username or password
