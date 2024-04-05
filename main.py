@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, Depends, status
-from typing import Annotated, List
+from typing import List
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from passlib.context import CryptContext
@@ -38,6 +38,18 @@ class TranscationModel(TransactionBase):
     class Config:
         orm_mode = True
 
+class ClientBase(BaseModel):
+    age: int
+    weight: float
+    height: float
+    objectives: str
+
+class ClientModel(ClientBase):
+    id: int
+
+    class Config:
+        orm_mode = True
+
 def get_db():
     db = SessionLocal()
     try:
@@ -47,14 +59,11 @@ def get_db():
 
 models.Base.metadata.create_all(bind=engine)
 
-# Secret key for JWT token
-SECRET_KEY = "your_secret_key_here"
+SECRET_KEY = "secret_key"
 ALGORITHM = "HS256"
 
-# Password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-# Token expiration time (in minutes)
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
@@ -66,19 +75,15 @@ class User(BaseModel):
 class UserInDB(User):
     hashed_password: str
 
-# Initialize logger
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 
-# Create file handler
 file_handler = logging.FileHandler("error.log")
 file_handler.setLevel(logging.ERROR)
 
-# Create formatter and add it to the handler
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
 
-# Add file handler to logger
 logger.addHandler(file_handler)
 
 def verify_password(plain_password, hashed_password):
@@ -123,7 +128,6 @@ async def update_transaction(
     if not db_transaction:
         raise HTTPException(status_code=404, detail="Transaction not found")
     
-    # Update the relevant fields
     db_transaction.amount = updated_transaction.amount
     db_transaction.category = updated_transaction.category
     db_transaction.description = updated_transaction.description
@@ -147,45 +151,30 @@ async def delete_transaction(transaction_id: int, db: Session = Depends(get_db))
 @app.post("/register/")
 async def register(user: User, db: Session = Depends(get_db)):
     try:
-        # Check if the username already exists
         existing_user = db.query(models.User).filter(models.User.username == user.username).first()
         if existing_user:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already exists")
 
-        # Hash the password
         hashed_password = pwd_context.hash(user.password)
 
-        # Create a new user
         new_user = models.User(username=user.username, hashed_password=hashed_password)
         db.add(new_user)
         db.commit()
 
-        # Generate access token for the newly registered user
         access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
         access_token = create_access_token(data={"sub": user.username}, expires_delta=access_token_expires)
         
         return {"access_token": access_token, "token_type": "bearer"}
     except Exception as e:
-        # Log the error and return an appropriate response
         logger.error(f"Error occurred during user registration: {str(e)}")
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error")
 
-# JWT token creation function
-def create_access_token(data: dict, expires_delta: timedelta):
-    to_encode = data.copy()
-    expire = datetime.utcnow() + expires_delta
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
-
-# User authentication function
 def authenticate_user(db: Session, username: str, password: str):
     user = get_user(db, username)
     if not user or not verify_password(password, user.hashed_password):
         return False
     return user
 
-# Dependency to get the current user from JWT token
 def get_current_user(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -217,6 +206,48 @@ async def login(user: User, db: Session = Depends(get_db)):
         
         return {"access_token": access_token, "token_type": "bearer"}
     except Exception as e:
-        # Log the error and return an appropriate response
         logger.error(f"Error occurred during user login: {str(e)}")
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error")
+
+@app.post("/clients/", response_model=ClientModel)
+async def create_client(client: ClientBase, db: Session = Depends(get_db)):
+    db_client = models.Client(**client.dict())
+    db.add(db_client)
+    db.commit()
+    db.refresh(db_client)
+    return db_client
+
+@app.get("/clients/", response_model=List[ClientModel])
+async def read_clients(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    clients = db.query(models.Client).offset(skip).limit(limit).all()
+    return clients
+
+@app.get("/clients/{client_id}", response_model=ClientModel)
+async def read_client(client_id: int, db: Session = Depends(get_db)):
+    client = db.query(models.Client).filter(models.Client.id == client_id).first()
+    if client is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return client
+
+@app.put("/clients/{client_id}", response_model=ClientModel)
+async def update_client(client_id: int, client: ClientBase, db: Session = Depends(get_db)):
+    db_client = db.query(models.Client).filter(models.Client.id == client_id).first()
+    if db_client is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+
+    for var, value in vars(client).items():
+        setattr(db_client, var, value)  # Update the client attributes
+
+    db.commit()
+    db.refresh(db_client)
+    return db_client
+
+@app.delete("/clients/{client_id}", response_model=ClientModel)
+async def delete_client(client_id: int, db: Session = Depends(get_db)):
+    db_client = db.query(models.Client).filter(models.Client.id == client_id).first()
+    if db_client is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+
+    db.delete(db_client)
+    db.commit()
+    return db_client
