@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import api from "./api";
 import { useAuth } from './AuthContext'; // import the useAuth hook
 import { useNavigate } from 'react-router-dom'; // import the useNavigate hook
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './Login.css';
+import jwt_decode from 'jwt-decode';
 
 const Login = () => {
-  const { setIsAuthenticated } = useAuth(); // get the setIsAuthenticated function from the AuthContext
+  const { isAuthenticated, setIsAuthenticated } = useAuth(); // get the isAuthenticated and setIsAuthenticated functions from the AuthContext
   const navigate = useNavigate(); // get the navigate function from react-router-dom
   const [registerFormData, setRegisterFormData] = useState({
     username: "",
     password: "",
-    confirmPassword: "" // New state for password confirmation
   });
 
   const [loginFormData, setLoginFormData] = useState({
@@ -42,6 +42,29 @@ const Login = () => {
     }));
   };
 
+  useEffect(() => {
+    // Check if the user is authenticated and only redirect if not on the login page
+    if (isAuthenticated && !window.location.pathname.includes('/login')) {
+      // Fetch user information when the component mounts
+      fetchUserInfo();
+    }
+  }, [isAuthenticated]);
+  
+  const fetchUserInfo = async () => {
+    try {
+      const response = await api.get(`/clients/`); // Replace userId with the actual user ID
+      if (response.data) {
+        // Redirect to ProductsServices page if client profile exists
+        navigate('/dashboard');
+      } else {
+        // Redirect to dashboard if no client profile exists
+        navigate('/products&services');
+      }
+    } catch (error) {
+      console.error("Error fetching user information:", error);
+    }
+  };
+
   const handleRegisterFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -58,16 +81,6 @@ const Login = () => {
     } catch (error) {
       console.error("Error registering:", error);
     }
-    try {
-      await api.post("/register/", {
-        username: registerFormData.username,
-        password: registerFormData.password
-      });
-      // Optionally, you can redirect the user after successful registration
-      setIsLoginFormVisible(true); // Show login form after successful registration
-    } catch (error) {
-      console.error("Error registering:", error);
-    }
   };
 
   const handleLoginFormSubmit = async (event) => {
@@ -79,8 +92,8 @@ const Login = () => {
         localStorage.setItem('accessToken', response.data.accessToken);
         // Update the isAuthenticated state
         setIsAuthenticated(true);
-        // Redirect to dashboard
-        navigate('/dashboard'); // Navigate to dashboard
+        // Fetch user information to determine redirection
+        fetchUserInfo();
       }
     } catch (error) {
       console.error("Error logging in:", error);
