@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Login from './Login';
 import './App.css'; // Importăm fișierul CSS pentru stilizare
+import Contact from './contact';
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/contact" element={<Contact />} />
         {/* Alte rute pot fi adăugate aici */}
 
         {/* Text de test pe pagina principală */}
