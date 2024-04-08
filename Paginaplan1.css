@@ -1,10 +1,72 @@
 /* Paginaplan1.css */
-
-.paginaplan1-container {
-    text-align: center; /* Aliniere text la centru */
+h4 {
+    font-size: 40px; /* Setează dimensiunea fontului */
+    color: #ff0000; /* Setează culoarea la roșu */
+    margin-bottom: 20px; /* Adaugă un spațiu între titlu și următorul conținut */
+}
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    background-image: url('images/33.jpg'); /* Înlocuiește 'calea/catre/imagine.jpg' cu calea către imaginea ta */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.paginaplan1-container h1 {
-    color: #333; /* Culore text */
-    font-size: 2rem; /* Dimensiune font */
+.paginaplan1-container {
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Adaugă un fundal semi-transparent */
+    color: #fff;
+}
+
+.planuri-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.plan {
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #cccf; /* Setează culoarea textului pentru diete la negru */
+}
+
+.plan p {         /* pt culoare preturi */
+    color: #fff; /* Setează culoarea textului pentru prețuri la alb */
+}
+
+.plan:hover {
+    background-color: #13a0e7;
+}
+
+.plan.selected {
+    background-color: #13a0e7;
+}
+
+.descriere-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Adaugă un fundal semi-transparent */
+}
+
+.descriere-container h2 {
+    color: #000; /* Setează culoarea textului la negru pentru titlurile din descriere-container */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
 }

@@ -13,6 +13,7 @@
   }
 }
 
+
 .full-screen-background {
   background-image: url('123.jpg'); /* Imaginea de fundal */
   background-size: cover; /* Imaginea va acoperi întregul ecran */
@@ -30,6 +31,8 @@
   width: 100%;
   height: 100%;
 }
+
+
 
 
 .content {
