@@ -27,35 +27,36 @@ const ProductsServices = () => {
 
     // Funcție pentru a efectua acțiunea de cumpărare și a naviga către o nouă pagină HTML pentru fiecare plan
     const buyPlan = (plan) => {
-        // Înlocuiește 'nume-pagina-planX.html' cu numele real al paginii pentru fiecare plan
-        navigate(`Pagina${plan}`);
+        navigate(`/Pagina${plan}`);
     };
 
     return (
-        <div className="products-services-container">
-            <h1>Keep It Fit</h1>
-            <div className={`plan-container ${selectedPlan === "plan1" ? 'selected' : ''}`} onClick={() => showPlanDetails("plan1")}>
-                <h2>Pachet 1</h2>
-                <p>Slăbire rapidă</p>
-            </div>
-            <div className={`plan-container1 ${selectedPlan === "plan2" ? 'selected' : ''}`} onClick={() => showPlanDetails("plan2")}>
-                <h2>Pachet 2</h2>
-                <p>Antrenor personal</p>
-            </div>
-            <div className={`plan-container2 ${selectedPlan === "plan3" ? 'selected' : ''}`} onClick={() => showPlanDetails("plan3")}>
-                <h2>Pachet 3</h2>
-                <p>Masă musculară</p>
-            </div>
-
-            {/* Meniu detaliat al planului */}
-            {selectedPlan && (
-                <div className="plan-details">
-                    <h2>{selectedPlan}</h2>
-                    <p>{planDescriptions[selectedPlan]}</p>
-                    <button onClick={() => buyPlan(selectedPlan)}>Acces</button>
-                    <button onClick={hidePlanDetails}>Înapoi</button>
+        <div id="productsservices-container">
+            <div className="products-services-container">
+                <h1>Keep It Fit</h1>
+                <div className={`plan-container ${selectedPlan === "plan1" ? 'selected' : ''}`} onClick={() => showPlanDetails("plan1")}>
+                    <h2>Pachet 1</h2>
+                    <p>Slăbire rapidă</p>
                 </div>
-            )}
+                <div className={`plan-container1 ${selectedPlan === "plan2" ? 'selected' : ''}`} onClick={() => showPlanDetails("plan2")}>
+                    <h2>Pachet 2</h2>
+                    <p>Antrenor personal</p>
+                </div>
+                <div className={`plan-container2 ${selectedPlan === "plan3" ? 'selected' : ''}`} onClick={() => showPlanDetails("plan3")}>
+                    <h2>Pachet 3</h2>
+                    <p>Masă musculară</p>
+                </div>
+
+                {/* Meniu detaliat al planului */}
+                {selectedPlan && (
+                    <div className="plan-details">
+                        <h2>{selectedPlan}</h2>
+                        <p>{planDescriptions[selectedPlan]}</p>
+                        <button onClick={() => buyPlan(selectedPlan)}>Acces</button>
+                        <button onClick={hidePlanDetails}>Înapoi</button>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

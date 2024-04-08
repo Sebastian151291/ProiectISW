@@ -85,10 +85,13 @@ h1 {   /* titlu */
 body {
     margin: 0;
     padding: 0;
+}
+#productsservices-container {
     background-image: url('images/background.jpg');
     background-size: cover;
     background-position: center;
-    height: 100vh; /* Asigură ca imaginea de fundal să acopere întreaga înălțime a ecranului */
+    height: 100vh;
+    padding: 20px;
 }
 
 .plan-container {        /* pt chenar 1 */
