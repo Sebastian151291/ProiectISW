@@ -5,6 +5,9 @@ import Login from './Login';
 import './App.css'; // Importăm fișierul CSS pentru stilizare
 import Contact from './contact';
 import ProductsServices from './ProductsServices';
+import Paginaplan1 from './Paginaplan1';
+import Paginaplan2 from './Paginaplan2';
+import Paginaplan3 from './Paginaplan3';
 
 const App = () => {
   return (
@@ -14,6 +17,9 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/ProductsServices" element={<ProductsServices />} />
+        <Route path="/Paginaplan1" element={<Paginaplan1 />} />
+        <Route path="/Paginaplan2" element={<Paginaplan2 />} />
+        <Route path="/Paginaplan3" element={ <Paginaplan3 />} />
         {/* Alte rute pot fi adăugate aici */}
 
         {/* Text de test pe pagina principală */}
