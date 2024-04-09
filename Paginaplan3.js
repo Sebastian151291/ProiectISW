@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext'; // import the useAuth hook
-import './Paginaplan3.css'; // Importăm fișierul CSS pentru stilizare
+import React from 'react';
+//import { useNavigate } from 'react-router-dom';
+//import { useAuth } from './AuthContext'; 
+import './Styles/Paginaplan3.css'; 
 
 const Paginaplan3 = () => {
     return (

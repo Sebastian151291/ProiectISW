@@ -87,7 +87,7 @@ body {
     padding: 0;
 }
 #productsservices-container {
-    background-image: url('images/background.jpg');
+    background-image: url('images/ContactBackground.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -102,7 +102,7 @@ body {
     display: inline-block;
     width: 200px;
     background-color: rgba(255, 255, 255, 0.8); /* Culoare de fundal cu 50% opacitate */
-    background-image: url('images/bb5.jpg'); /* Înlocuiți 'calea/catre/imagine.png' cu calea către imaginea dvs. */
+    background-image: url('images/Plan1.jpg');
     background-size: cover; /* Asigurați-vă că imaginea se extinde pentru a umple întreaga casetă */
     background-repeat: no-repeat; /* Evitați repetarea imaginii */
     background-position: center; /* Centrare imagine */
@@ -116,7 +116,7 @@ body {
     display: inline-block;
     width: 200px;
     background-color: rgba(255, 255, 255, 0.8); /* Culoare de fundal cu 50% opacitate */
-    background-image: url('images/cc34.jpg'); /* Înlocuiți 'calea/catre/imagine.png' cu calea către imaginea dvs. */
+    background-image: url('images/Plan2.jpg'); /* Înlocuiți 'calea/catre/imagine.png' cu calea către imaginea dvs. */
     background-size: cover; /* Asigurați-vă că imaginea se extinde pentru a umple întreaga casetă */
     background-repeat: no-repeat; /* Evitați repetarea imaginii */
     background-position: center; /* Centrare imagine */
@@ -130,7 +130,7 @@ body {
     margin: 20px;
     display: inline-block;
     width: 200px;
-    background-image: url('images/fb.jpg'); /* Înlocuiți 'calea/catre/imagine.png' cu calea către imaginea dvs. */
+    background-image: url('images/Plan3.jpg'); /* Înlocuiți 'calea/catre/imagine.png' cu calea către imaginea dvs. */
     background-size: cover; /* Asigurați-vă că imaginea se extinde pentru a umple întreaga casetă */
     background-repeat: no-repeat; /* Evitați repetarea imaginii */
     background-position: center; /* Centrare imagine */

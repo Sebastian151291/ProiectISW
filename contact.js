@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext'; // import the useAuth hook
-import './contact.css'; // Importăm fișierul CSS pentru stilizare
+import React from 'react';
+import './Styles/contact.css';
 
 const Contact = () => {
     const showMenu = () => {
@@ -10,8 +8,6 @@ const Contact = () => {
             navLinks.style.right = "0";
         }
     };
-
-    
 
     return (
         <div>
@@ -23,6 +19,7 @@ const Contact = () => {
             </section>
 
             <section className="location">
+                {/* eslint-disable-next-line */}
                 <center><iframe src="http://maps.google.com/maps?q=45.645733, 25.602697&z=15&output=embed" width="600" height="450" style={{ border: '0' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe></center>
             </section>
 

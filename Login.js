@@ -1,30 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import api from "./api";
-import { useAuth } from './AuthContext'; // import the useAuth hook
-import { useNavigate } from 'react-router-dom'; // import the useNavigate hook
+import { useAuth } from './AuthContext'; 
+import { useNavigate } from 'react-router-dom'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import './Login.css';
-import jwt_decode from 'jwt-decode';
+import './Styles/Login.css';
 
 const Login = () => {
-  const { isAuthenticated, setIsAuthenticated } = useAuth(); // get the isAuthenticated and setIsAuthenticated functions from the AuthContext
-  const navigate = useNavigate(); // get the navigate function from react-router-dom
+  const { isAuthenticated, setIsAuthenticated } = useAuth(); 
+  const navigate = useNavigate(); 
   const [registerFormData, setRegisterFormData] = useState({
     username: "",
     password: "",
   });
-
   const [loginFormData, setLoginFormData] = useState({
     username: "",
     password: ""
   });
-
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
-  const [passwordMismatchError, setPasswordMismatchError] = useState(""); // State for password mismatch error
-  const [loginError, setLoginError] = useState(""); // State for login error
-  const [showPassword, setShowPassword] = useState(false); // State for showing password
-  const [isShaking, setIsShaking] = useState(false); // State for shake animation
+  const [passwordMismatchError, setPasswordMismatchError] = useState(""); 
+  const [loginError, setLoginError] = useState(""); 
+  const [showPassword, setShowPassword] = useState(false); 
+  const [isShaking, setIsShaking] = useState(false); 
 
   const handleRegisterInputChange = (event) => {
     const { name, value } = event.target;
@@ -42,41 +39,39 @@ const Login = () => {
     }));
   };
 
-  useEffect(() => {
-    // Check if the user is authenticated and only redirect if not on the login page
-    if (isAuthenticated && !window.location.pathname.includes('/login')) {
-      // Fetch user information when the component mounts
-      fetchUserInfo();
-    }
-  }, [isAuthenticated]);
-  
   const fetchUserInfo = async () => {
     try {
-      const response = await api.get(`/clients/`); // Replace userId with the actual user ID
-      if (response.data) {
-        // Redirect to ProductsServices page if client profile exists
-        navigate('/dashboard');
+      const response = await api.get("/users/me/profile");
+      if (response.data && response.data.length > 0) {
+        // If the user has a profile, redirect to products&services
+        navigate('/productsservices');
       } else {
-        // Redirect to dashboard if no client profile exists
-        navigate('/products&services');
+        // If the user doesn't have a profile, stay on the dashboard
+        navigate('/dashboard');
       }
     } catch (error) {
       console.error("Error fetching user information:", error);
     }
   };
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchUserInfo();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
+
   const handleRegisterFormSubmit = async (event) => {
     event.preventDefault();
     try {
       // Check if username and password are not empty
       if (!registerFormData.username || !registerFormData.password) {
-        // Display error message or prevent form submission
         console.error("Username and password are required");
         setIsShaking(true); // Trigger shake animation
         setTimeout(() => setIsShaking(false), 500); // Turn off shake animation after 0.5s
         return; // Exit early if validation fails
       }
-      await api.post("/register/", registerFormData);
+      await api.post("/users/", registerFormData);
       setIsLoginFormVisible(true);
     } catch (error) {
       console.error("Error registering:", error);
@@ -86,25 +81,29 @@ const Login = () => {
   const handleLoginFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await api.post("/login/", loginFormData);
-      if (response.data) {
-        // Store the access token in local storage
-        localStorage.setItem('accessToken', response.data.accessToken);
-        // Update the isAuthenticated state
-        setIsAuthenticated(true);
-        // Fetch user information to determine redirection
-        fetchUserInfo();
-      }
+        // Convert the login form data to x-www-form-urlencoded format
+        const formData = new URLSearchParams();
+        formData.append('username', loginFormData.username);
+        formData.append('password', loginFormData.password);
+        const response = await api.post("/token/", formData);
+        if (response.data.access_token) {
+          // If the login is successful, store the token in local storage
+          localStorage.setItem("token", response.data.access_token);
+          // Set the isAuthenticated state to true
+          setIsAuthenticated(true);
+        } else {
+          // If the login is not successful, display an error message
+          setLoginError("Invalid username/password");
+        }
     } catch (error) {
-      console.error("Error logging in:", error);
-      // Set login error message
-      setLoginError("Incorrect username or password");
+        console.error("Error logging in:", error);
+        setLoginError("Invalid username/password");
+        
     }
   };
 
   const handleSwitchForm = () => {
     setIsLoginFormVisible((prevIsLoginFormVisible) => !prevIsLoginFormVisible);
-    // Reset error messages when switching forms
     setPasswordMismatchError("");
     setLoginError("");
   };
@@ -114,7 +113,7 @@ const Login = () => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundImage: "url('123.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundImage: "url('LoginBackground.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
       <div style={{ textAlign: "center", backgroundColor: "rgba(255, 255, 255, 0.8)", padding: "2rem", borderRadius: "10px" }}>
         {isLoginFormVisible ? (
           <div>
@@ -136,14 +135,23 @@ const Login = () => {
                 <br />
                 <div style={{ position: "relative" }}>
                   <input
-                    type={showPassword ? "text" : "password"} // Toggle between text and password type
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     name="password"
                     onChange={handleLoginInputChange}
                     value={loginFormData.password}
                   />
-                  <button type="button" onClick={togglePasswordVisibility} style={{ position: "absolute", right: "2px", top: "50%", transform: "translateY(-50%)", border: "none", background: "none", cursor: "pointer" }}>
-                    {showPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />} {/* Eye icon */}
+                  <button type="button" onClick={togglePasswordVisibility} style={{ 
+                      position: "absolute", 
+                      right: "-10px", 
+                      top: "15px", 
+                      transform: "translateY(-50%)", 
+                      background: "none", 
+                      color: "black", 
+                      cursor: "pointer",
+                      zIndex: "1" // Ensure the button appears on top
+                  }}>
+                      {showPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />} 
                   </button>
                 </div>
               </div>
@@ -172,15 +180,24 @@ const Login = () => {
                 <br />
                 <div style={{ position: "relative" }}>
                   <input
-                    type={showPassword ? "text" : "password"} // Toggle between text and password type
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     name="password"
                     onChange={handleRegisterInputChange}
                     value={registerFormData.password}
                     className={isShaking ? "shake" : ""}
                   />
-                  <button type="button" onClick={() => togglePasswordVisibility("password")} style={{ position: "absolute", right: "2px", top: "50%", transform: "translateY(-50%)", border: "none", background: "none", cursor: "pointer" }}>
-                    {showPassword.password ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />} {/* Eye icon */}
+                  <button type="button" onClick={togglePasswordVisibility} style={{ 
+                      position: "absolute", 
+                      right: "-10px", 
+                      top: "15px", 
+                      transform: "translateY(-50%)", 
+                      background: "none", 
+                      color: "black", 
+                      cursor: "pointer",
+                      zIndex: "1"
+                  }}>
+                      {showPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />} 
                   </button>
                 </div>
               </div>
@@ -190,7 +207,15 @@ const Login = () => {
           </div>
         )}
         <div style={{ marginTop: "1rem" }}>
-          <button onClick={handleSwitchForm} style={{ padding: "0.5rem 1rem", fontSize: "1rem", cursor: "pointer", backgroundColor: "#007bff", color: "#fff", border: "none", borderRadius: "5px" }}>
+          <button onClick={handleSwitchForm} style={{ 
+            padding: "0.5rem 1rem", 
+            fontSize: "1rem", 
+            cursor: "pointer", 
+            backgroundColor: "#007bff", 
+            color: "#fff", 
+            border: "none", 
+            borderRadius: "5px" 
+            }}>
             {isLoginFormVisible ? "No Account?" : "Already Registered?"}
           </button>
         </div>

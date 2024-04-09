@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext'; // import the useAuth hook
-import './Paginaplan1.css'; // Importăm fișierul CSS pentru stilizare
+//import { useAuth } from './AuthContext'; 
+import api from './api'; 
+import './Styles/Paginaplan1.css';
 
 const Paginaplan1 = () => {
     const [selectedPlan, setSelectedPlan] = useState(null);
     const navigate = useNavigate();
-    const { user } = useAuth(); // presupunând că useAuth furnizează informații despre utilizator, cum ar fi autentificarea
 
     const plans = [
         { title: 'Dieta vegana', description: ' Dieta bazata doar pe plante bine alese pentru rezultate rapide', price: '50 lei' },
@@ -20,9 +20,28 @@ const Paginaplan1 = () => {
     };
 
     const handleBuy = () => {
-        // Logic pentru achiziționare, poate redirecționa către o pagină de plată sau executa alte acțiuni relevante
-        navigate('/pagina-de-plata');
+        // UTC+3 Time
+        const currentDate = new Date();
+        currentDate.setUTCHours(currentDate.getUTCHours() + 3);
+        const plan = plans[selectedPlan];
+
+        api.post('/users/me/transactions/', {
+            amount: parseFloat(plan.price), 
+            category: 'Diete',
+            description: plan.title,
+            is_income: false,
+            date: currentDate 
+        })
+        .then(response => {
+            console.log('Tranzacție adăugată cu succes:', response.data);
+            navigate('/pagina-de-plata');
+        })
+        .catch(error => {
+            console.error('Eroare la adăugarea tranzacției:', error);
+            // Treat error for the UI
+        });
     };
+    
 
     return (
         <div className="wrapper">
