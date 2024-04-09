@@ -1,0 +1,186 @@
+.products-services-container {
+    text-align: center;
+}
+
+h1 {   /* titlu */
+    font-size: 6rem; /* Măriți dimensiunea titlului */
+    color: #ff0000; /* Schimbați culoarea titlului la albastru (sau orice altă culoare doriți) */
+    font-weight: bold; /* Faceți textul mai îngroșat */
+    text-transform: uppercase; /* Convertiți textul în majuscule */
+    text-shadow: 2px 2px 4px rgba(255, 247, 0, 0.2); /* Adăugați un efect de umbră pentru mai multă adâncime */
+    margin-bottom: 20px; /* Spațiu de dedesubt al titlului */
+}
+
+
+.plan-container {
+    border: 2px solid #ca14e6;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.8); /* Culoare de fundal cu 50% opacitate */
+    
+}
+
+
+.plan-container:hover {
+    border-color: #1168c4;
+    cursor: pointer;
+}
+.plan-container1:hover {
+    border-color: #1168c4;
+    cursor: pointer;
+}
+.plan-container2:hover {
+    border-color: #1168c4;
+    cursor: pointer;
+}
+
+
+.plan-details {
+    position: absolute;
+    top: 70%; /* Modificați acest număr pentru a coborî caseta mai jos */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 300px;
+    background-color: rgba(249, 249, 249, 0.8); /* Culoare de fundal cu 80% opacitate */
+    border: 2px solid rgba(0, 123, 255, 0.8); /* Border cu 80% opacitate */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    overflow-wrap: break-word; /* Asigură că cuvintele se împart pe mai multe linii */
+}
+
+
+
+
+
+
+
+
+
+.plan-details button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.plan-details button:hover {
+    background-color: #0056b3;
+}
+.plan-details h2 {
+    color: #007bff;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center; /* Centrare text */
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+#productsservices-container {
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.plan-container {        /* pt chenar 1 */
+    border: 2px solid #ca14e6;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.8); /* Culoare de fundal cu 50% opacitate */
+    background-image: url('images/bb5.jpg'); /* Înlocuiți 'calea/catre/imagine.png' cu calea către imaginea dvs. */
+    background-size: cover; /* Asigurați-vă că imaginea se extinde pentru a umple întreaga casetă */
+    background-repeat: no-repeat; /* Evitați repetarea imaginii */
+    background-position: center; /* Centrare imagine */
+}
+
+.plan-container1 {        /* pt chenar 2 */
+    border: 2px solid #ca14e6;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.8); /* Culoare de fundal cu 50% opacitate */
+    background-image: url('images/cc34.jpg'); /* Înlocuiți 'calea/catre/imagine.png' cu calea către imaginea dvs. */
+    background-size: cover; /* Asigurați-vă că imaginea se extinde pentru a umple întreaga casetă */
+    background-repeat: no-repeat; /* Evitați repetarea imaginii */
+    background-position: center; /* Centrare imagine */
+}
+
+
+.plan-container2 {
+    border: 2px solid #ca14e6;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+    width: 200px;
+    background-image: url('images/fb.jpg'); /* Înlocuiți 'calea/catre/imagine.png' cu calea către imaginea dvs. */
+    background-size: cover; /* Asigurați-vă că imaginea se extinde pentru a umple întreaga casetă */
+    background-repeat: no-repeat; /* Evitați repetarea imaginii */
+    background-position: center; /* Centrare imagine */
+    background-color: rgba(255, 255, 255, 0.8); /* Culoare de fundal cu opacitate 50% */
+}
+
+
+
+
+
+/* ingrosare text pt fiecare casetuta */
+
+
+
+.plan-container2 h2 {
+    font-weight: bolder; /* Ajustați grosimea textului după preferință */
+    color: #f80000; /* Setare culoare text la negru */ }
+
+    
+.plan-container2 p {
+    font-weight: bolder; /* Ajustați grosimea textului după preferință */
+    color: #ff0000; /* Setare culoare text la negru */ 
+    font-size: 1.7rem; /* Ajustați dimensiunea textului după preferință */}
+
+
+
+
+
+
+.plan-container1 h2 {
+    font-weight: bolder; /* Ajustați grosimea textului după preferință */
+    color: #00ff04; /* Setare culoare text la negru */ }
+
+    
+.plan-container1 p {
+    font-weight: bolder; /* Ajustați grosimea textului după preferință */
+    color: #00ff04; /* Setare culoare text la negru */ 
+    font-size: 2rem; /* Ajustați dimensiunea textului după preferință */}     
+    
+
+
+
+
+
+.plan-container h2 {
+    font-weight: bolder; /* Ajustați grosimea textului după preferință */
+    color: #0073ff; /* Setare culoare text la negru */ }
+
+    
+.plan-container p {
+    font-weight: bolder; /* Ajustați grosimea textului după preferință */
+    color: #0073ff; /* Setare culoare text la negru */ 
+    font-size: 1.7rem; /* Ajustați dimensiunea textului după preferință */}     

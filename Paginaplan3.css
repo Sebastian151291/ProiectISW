@@ -1,0 +1,10 @@
+/* Paginaplan1.css */
+
+.paginaplan1-container {
+    text-align: center; /* Aliniere text la centru */
+}
+
+.paginaplan1-container h1 {
+    color: #333; /* Culore text */
+    font-size: 2rem; /* Dimensiune font */
+}

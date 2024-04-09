@@ -1,0 +1,133 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+
+.full-screen-background {
+  background-image: url('123.jpg'); /* Imaginea de fundal */
+  background-size: cover; /* Imaginea va acoperi întregul ecran */
+  background-position: center;
+  /* Alte stiluri CSS pentru fundal */
+
+  /* Setarea culorii textului pentru a fi vizibil pe imagine */
+  color: white;
+  text-align: center;
+
+  /* Dimensiuni pentru a ocupa întregul ecran */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+.content {
+  padding-top: 50px; /* Adaugăm puțin spațiu între titlu și marginea de sus a ecranului */
+}
+
+.title {
+  font-size: 3em; /* Mărimea fontului pentru titlu */
+  font-weight: bold; /* Font bold pentru titlu */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Umbră pentru text */
+  color: violet; /* Culoarea textului */
+  margin-bottom: 150px; /* Adăugăm un spațiu de 20px între titlu și paragraf */
+}
+
+
+
+
+
+.contact-link {
+  color: rgb(186, 189, 9); /* Culoarea link-ului */
+  text-decoration: none; /* Eliminăm sublinierea implicită */
+}
+
+.contact-link:hover {
+  text-decoration: underline; /* Adăugăm subliniere la survolul mouse-ului */
+}
+
+
+
+
+
+
+
+.footer {
+  position: fixed;      
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(240, 240, 240, 0); /* fundal transparent */
+  padding: 20px;
+  text-align: center;
+  z-index: 999; /* asigură-te că este la fața paginii */
+}
+
+.footer p {
+  color: #e056e0; /* culoarea textului mov mai închis */
+  font-size: 1.3em; /* mărimea textului */
+}
+
+
+
+
+
+
+.text-container {
+  max-width: 800px; /* lățimea maximă a containerului de text */
+  margin: 0 auto; /* alinierea la centru */
+  backdrop-filter: blur(2px); /* aplică un efect de blur */
+  background-color: rgba(255, 255, 255, 0.5); /* culoare de fundal cu transparență */
+  padding: 20px; /* spațiere între text și fundal */
+  margin-top: -70px; /* mută textul în sus */
+}
+
+.text {
+  color: #e905c3; /* culoarea textului mov mai închis */
+  font-size: 1.2em; /* mărimea textului */
+  font-weight: bold; /* textul mai gros */
+}
+
+
+
+
+
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
