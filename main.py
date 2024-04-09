@@ -18,14 +18,16 @@ models.Base.metadata.create_all(bind=engine)
 
 origins = (
     "http://localhost:3000",
+    "http://192.168.1.129:3000",
+    "http://keepitfit.ddns.net:3000"
 )
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*']
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=['*'],
 )
 
 # Database
@@ -62,7 +64,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-
+#Endpoints
 @app.post("/users/", status_code=status.HTTP_201_CREATED)
 async def create_user(user: UserBase, db: Session = Depends(get_db)):
     hashed_password = pwd_context.hash(user.password)
