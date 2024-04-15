@@ -113,8 +113,21 @@ const Login = () => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundImage: "url('LoginBackground.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
-      <div style={{ textAlign: "center", backgroundColor: "rgba(255, 255, 255, 0.8)", padding: "2rem", borderRadius: "10px" }}>
+    <div style={{ 
+      display: "flex", 
+      justifyContent: "center", 
+      alignItems: "center", 
+      minHeight: "100vh", 
+      backgroundImage: "url('LoginBackground.jpg')", 
+      backgroundSize: "cover", 
+      backgroundPosition: "center" 
+      }}>
+      <div style={{ 
+        textAlign: "center", 
+        backgroundColor: "rgba(255, 255, 255, 0.8)", 
+        padding: "2rem", 
+        borderRadius: "10px" 
+        }}>
         {isLoginFormVisible ? (
           <div>
             <h2>Login</h2>
@@ -201,7 +214,7 @@ const Login = () => {
                   </button>
                 </div>
               </div>
-              {passwordMismatchError && <div style={{ color: "red" }}>{passwordMismatchError}</div>} {/* Display password mismatch error message */}
+              {passwordMismatchError && <div style={{ color: "red" }}>{passwordMismatchError}</div>}
               <button type="submit">Register</button>
             </form>
           </div>

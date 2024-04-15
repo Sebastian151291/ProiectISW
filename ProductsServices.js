@@ -12,11 +12,11 @@ const ProductsServices = () => {
 
     // Obiect pentru a ține descrierile pentru fiecare plan
     const planDescriptions = {
-        plan1: "Acest pachet este recomandat persoanelor care vor să piardă greutate într-un timp foarte scurt. " + 
+        plan1:  "Acest pachet este recomandat persoanelor care vor să piardă greutate într-un timp foarte scurt. " + 
                 "Acest pachet este compus din rețete delicioase caracterizate prin calorii reduse.",
-        plan2: "Acest pachet este recomandat persoanelor începătoare care au nevoie de un ajutor pentru " +
+        plan2:  "Acest pachet este recomandat persoanelor începătoare care au nevoie de un ajutor pentru " +
                 "executarea corectă a exercițiilor pentru antrenament.",
-        plan3: "Acest pachet este recomandat persoanelor care au ca obiect creșterea în greutate prin " +
+        plan3:  "Acest pachet este recomandat persoanelor care au ca obiect creșterea în greutate prin " +
                 "obținerea masei musculare stimulată prin exerciții și alimentație corespunzătoare."
     };
 
@@ -55,15 +55,18 @@ const ProductsServices = () => {
         <div id="productsservices-container">
             <div className="products-services-container">
                 <h1>Hello, {userName}</h1>
-                <div className={`plan-container ${selectedPlan === "plan1" ? 'selected' : ''}`} onClick={() => showPlanDetails("plan1")}>
+                <div className={`plan-container ${selectedPlan === "plan1" ? 'selected' : ''}`} 
+                 onClick={() => showPlanDetails("plan1")}>
                     <h2>Pachet 1</h2>
                     <p>Slăbire rapidă</p>
                 </div>
-                <div className={`plan-container1 ${selectedPlan === "plan2" ? 'selected' : ''}`} onClick={() => showPlanDetails("plan2")}>
+                <div className={`plan-container1 ${selectedPlan === "plan2" ? 'selected' : ''}`} 
+                 onClick={() => showPlanDetails("plan2")}>
                     <h2>Pachet 2</h2>
                     <p>Antrenor personal</p>
                 </div>
-                <div className={`plan-container2 ${selectedPlan === "plan3" ? 'selected' : ''}`} onClick={() => showPlanDetails("plan3")}>
+                <div className={`plan-container2 ${selectedPlan === "plan3" ? 'selected' : ''}`} 
+                 onClick={() => showPlanDetails("plan3")}>
                     <h2>Pachet 3</h2>
                     <p>Masă musculară</p>
                 </div>

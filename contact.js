@@ -19,8 +19,14 @@ const Contact = () => {
             </section>
 
             <section className="location">
-                {/* eslint-disable-next-line */}
-                <center><iframe src="http://maps.google.com/maps?q=45.645733, 25.602697&z=15&output=embed" width="600" height="450" style={{ border: '0' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe></center>
+                
+                <center>
+                    {/* eslint-disable-next-line */}
+                    <iframe src="http://maps.google.com/maps?q=45.645733, 25.602697&z=15&output=embed" 
+                    width="600" height="450" style={{ border: '0' }} allowFullScreen="" loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </center>
             </section>
 
             <section className="contact-us">
