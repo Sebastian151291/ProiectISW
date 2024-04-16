@@ -12,19 +12,23 @@ import PaymentResponse from './PaymentResponse';
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [popupContent, setPopupContent] = useState('');
+  const [popupContent, setPopupContent] = useState(null);
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
   const openPopup = (content) => {
-    if (content!== 'Menu')
-    {
     setPopupContent(content);
-    setIsOpen(true); 
-    }
+    setIsOpen(true);
   };
+
+  const closePopup = () => {
+    setPopupContent(null);
+    setIsOpen(false);
+  };
+
   const aboutUsText = (
     <>
+      {/* About Us content */}
       <p>
         <strong>This is what we do.</strong>
       </p>
@@ -32,36 +36,20 @@ const App = () => {
         We are a company that provides fitness services. Our mission is to help
         people achieve their fitness goals.
       </p>
-      <h2>Our Team</h2>
-      <p>
-        Our team is composed of experienced and certified professionals who are
-        dedicated to helping our clients reach their fitness goals. We believe
-        in a holistic approach to fitness, which includes physical exercise,
-        proper nutrition, and mental well-being.
-      </p>
-      <h2>Our Commitment</h2>
-      <p>
-        We are committed to providing a safe and supportive environment for our
-        clients. We understand that each individual has unique fitness goals
-        and needs, and we tailor our services to meet these needs.
-      </p>
-      <p>We invite you to join us on your fitness journey. Let's achieve your fitness goals together!</p>
+      {/* Add more content as needed */}
     </>
   );
 
   const whatDoesItDoText = (
     <>
+      {/* What Does It Do? content */}
       <p>
         <strong>This is the functionality of our app.</strong>
       </p>
       <p>
         First you need to register and offer a few details about yourself.
       </p>
-      <p>
-        After that you can choose one of the 3 plans we currently have
-        available and start working towards your fitness goals.
-      </p>
-      <p>Try our app today and take control of your health and wellness journey!</p>
+      {/* Add more content as needed */}
     </>
   );
 
@@ -81,20 +69,28 @@ const App = () => {
         )}
       </div>
 
-      <div className="button-container">
-        <button className="button about us" style={{backgroundImage: `url(${require('D:\\Documents\\MEGA downloads\\REACT-FASTAPI-MYSQL-APP\\React\\KeepItFit\\src\\Styles\\images\\1234.gif')})`}} onClick={() => openPopup(aboutUsText)}>
-          <div className='button-text'>About us</div>
-        </button>
-        <button className= "button what do we do" style={{backgroundImage: `url(${require('D:\\Documents\\MEGA downloads\\REACT-FASTAPI-MYSQL-APP\\React\\KeepItFit\\src\\Styles\\images\\gym1.gif')})`}} onClick={() => openPopup(whatDoesItDoText)}>
-          <div className='button-text'>What does it do?</div>
-        </button>
-        {/* Add more buttons as needed */}
-      </div>
-      <div className={`popup ${isOpen ? 'open' : ''}`}>
-        <p>{popupContent}</p>
-        <button onClick={toggleOpen}>Close</button>
-      </div>
       <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="page-container">
+              <div className="full-screen-background">
+                <div className="content">
+                  <h1 className="title">Welcome to KeepItFit</h1>
+                  <div className="button-container">
+                    <button className="button about us" style={{backgroundImage: `url(${require('D:\\Documents\\MEGA downloads\\REACT-FASTAPI-MYSQL-APP\\React\\KeepItFit\\src\\Styles\\images\\1234.gif')})`}} onClick={() => openPopup(aboutUsText)}>
+                      <div className='button-text'>About us</div>
+                    </button>
+                    <button className= "button what do we do" style={{backgroundImage: `url(${require('D:\\Documents\\MEGA downloads\\REACT-FASTAPI-MYSQL-APP\\React\\KeepItFit\\src\\Styles\\images\\gym1.gif')})`}} onClick={() => openPopup(whatDoesItDoText)}>
+                      <div className='button-text'>What does it do?</div>
+                    </button>
+                  </div>
+                  <footer className="footer"></footer>
+                </div>
+              </div>
+            </div>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/contact" element={<Contact />} />
@@ -103,21 +99,15 @@ const App = () => {
         <Route path="/Paginaplan2" element={<Paginaplan2 />} />
         <Route path="/Paginaplan3" element={<Paginaplan3 />} />
         <Route path="/pagina-de-plata" element={<PaymentResponse />} />
-        <Route
-          path="/"
-          element={
-            <div className="page-container">
-              <div className="full-screen-background">
-                <div className="content">
-                  <h1 className="title">Welcome to KeepItFit</h1>
-
-                  <footer className="footer"></footer>
-                </div>
-              </div>
-            </div>
-          }
-        />
       </Routes>
+
+      {/* Popup */}
+      {isOpen && popupContent && (
+        <div className={`popup ${isOpen ? 'open' : ''}`}>
+          <p>{popupContent}</p>
+          <button onClick={closePopup}>Close</button>
+        </div>
+      )}
     </Router>
   );
 };
