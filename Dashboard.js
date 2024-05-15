@@ -60,19 +60,45 @@ const Dashboard = () => {
       <form onSubmit={handleProfileSubmit}>
         <div>
           <label htmlFor="age">Age:</label>
-          <input type="number" id="age" value={age} onChange={(e) => setAge(e.target.value)} required />
+          <input 
+            type="number" 
+            id="age" 
+            value={age} 
+            onChange={(e) => setAge(e.target.value)} 
+            required 
+            placeholder="Enter your age" 
+          />
         </div>
         <div>
           <label htmlFor="weight">Weight (kg):</label>
-          <input type="number" id="weight" value={weight} onChange={(e) => setWeight(e.target.value)} required />
+          <input 
+            type="number" 
+            id="weight" 
+            value={weight} 
+            onChange={(e) => setWeight(e.target.value)} 
+            required 
+            placeholder="Enter your weight in kg" 
+          />
         </div>
         <div>
           <label htmlFor="height">Height (cm):</label>
-          <input type="number" id="height" value={height} onChange={(e) => setHeight(e.target.value)} required />
+          <input 
+            type="number" 
+            id="height" 
+            value={height} 
+            onChange={(e) => setHeight(e.target.value)} 
+            required 
+            placeholder="Enter your height in cm" 
+          />
         </div>
         <div>
           <label htmlFor="objectives">Objectives:</label>
-          <select id="objectives" value={objectives} onChange={(e) => setObjectives(e.target.value)} required>
+          <select 
+            id="objectives" 
+            value={objectives} 
+            onChange={(e) => setObjectives(e.target.value)} 
+            required
+          >
             <option value="">Select Objective</option>
             <option value="Weight loss">Weight Loss</option>
             <option value="Maintain">Maintain</option>

@@ -1,14 +1,19 @@
-/* Dashboard.css */
-.dashboard-container {
+   .dashboard-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    justify-content: center;
+    min-height: 100vh; /* Full viewport height */
+    background-image: url('images/DashboardBackground.jpg'); /* Add your image URL here */
+    background-size: cover; /* Adjust the size to cover the whole container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
   }
   
   h4 {
     margin-bottom: 20px;
     text-align: center;
+    color: black; /* Adjust text color if needed for better visibility */
   }
   
   form {
