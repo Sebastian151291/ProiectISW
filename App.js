@@ -8,7 +8,7 @@ import ProductsServices from './ProductsServices';
 import Paginaplan1 from './Paginaplan1';
 import Paginaplan2 from './Paginaplan2';
 import Paginaplan3 from './Paginaplan3';
-import PaymentResponse from './PaymentResponse'
+import PaymentResponse from './PaymentResponse';
 
 const App = () => {
   return (

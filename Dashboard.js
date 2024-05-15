@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext'; 
 import api from './api';
+import './Styles/Dashboard.css';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -26,11 +27,8 @@ const Dashboard = () => {
 
     if (isAuthenticated) {
       fetchUserInfo();
-    } else {
-      navigate('/login');
     }
   }, [isAuthenticated, navigate]);
-
 
   const handleProfileSubmit = async (event) => {
     event.preventDefault();
@@ -57,7 +55,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className="dashboard-container">
       <h4>Hello, {userName}</h4>
       <form onSubmit={handleProfileSubmit}>
         <div>
