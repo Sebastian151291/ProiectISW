@@ -5,7 +5,7 @@ import os
 
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-URL_DATABASE = f'mysql+pymysql://root:Pepsicola151@localhost:3306/prjisw'
+URL_DATABASE = f'mysql+pymysql://root:{DB_PASSWORD}@localhost:3306/prjisw'
 
 engine = create_engine(URL_DATABASE)
 
