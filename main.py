@@ -18,8 +18,8 @@ models.Base.metadata.create_all(bind=engine)
 
 origins = (
     "http://localhost:3000",
-    "http://192.168.1.129:3000",
-    "http://keepitfit.ddns.net:3000"
+    "http://192.168.1.130:3000",
+    "http://webrtcpi.ddns.net:3000"
 )
 
 app.add_middleware(
